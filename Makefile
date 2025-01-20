@@ -1,10 +1,15 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -std=c++17 -MMD -MP
+
+# Directories
+SRC_DIR = .
+BUILD_DIR = build
 
 # Source and object files
-SRC = main.cpp cd.cpp execute.cpp inputParser.cpp pipes.cpp redirections.cpp  
-OBJ = $(SRC:.cpp=.o)
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(SRC))
+DEPS = $(OBJ:.o=.d)
 
 # Output executable
 TARGET = shell
@@ -14,16 +19,20 @@ all: $(TARGET)
 
 # Rule to compile executable
 $(TARGET): $(OBJ)
-    $(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-# Rule to compile .cpp files into .o
-%.o: %.cpp
-    $(CXX) $(CXXFLAGS) -c $< -o $@
+# Rule to compile .cpp files into .o with dependency tracking
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Include generated dependency files
+-include $(DEPS)
 
 # Clean build files
 clean:
-    rm -f $(OBJ) $(TARGET)
+	rm -rf $(BUILD_DIR) $(TARGET)
 
 # Run program
 run: all
-    ./$(TARGET)
+	./$(TARGET)
