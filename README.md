@@ -1,7 +1,7 @@
-# Custom Shell
+# Shell in C++
 
 ## Overview
-This is a simple custom shell written in C++ from scratch. It supports various shell-like features including command execution, piping, background processes, and I/O redirection.
+This is a simple shell written in C++ from scratch. It supports various shell-like features including command execution, piping, background processes, and I/O redirection.
 
 ## Features
 - **Execute Commands**: Run standard system commands.
