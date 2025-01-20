@@ -22,7 +22,27 @@ string getPathFromHome(){
   return dir;
 }
 
+void banner(){
+  cout<<endl;
+  cout<<" ███████╗██╗  ██╗███████╗██╗     ██╗               "<<endl; 
+  cout<<" ██╔════╝██║  ██║██╔════╝██║     ██║               "<<endl; 
+  cout<<" ███████╗███████║█████╗  ██║     ██║         █████╗"<<endl;
+  cout<<" ╚════██║██╔══██║██╔══╝  ██║     ██║         ╚════╝"<<endl;
+  cout<<" ███████║██║  ██║███████╗███████╗███████╗          "<<endl; 
+  cout<<" ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝          "<<endl; 
+  cout<<"                                                   "<<endl; 
+  cout<<" ██████╗ ██╗   ██╗███╗   ██╗██╗  ██╗               "<<endl; 
+  cout<<" ██╔══██╗██║   ██║████╗  ██║██║ ██╔╝               "<<endl; 
+  cout<<" ██████╔╝██║   ██║██╔██╗ ██║█████╔╝                "<<endl; 
+  cout<<" ██╔═══╝ ██║   ██║██║╚██╗██║██╔═██╗                "<<endl; 
+  cout<<" ██║     ╚██████╔╝██║ ╚████║██║  ██╗               "<<endl; 
+  cout<<" ╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝               "<<endl; 
+  cout<<endl;
+  return;
+}
+
 void showHelp() {
+  banner();
   cout << "===== Shell Help =====\n";
   cout << "This shell supports the following commands and features:\n\n";
   cout << "  cd <dir>       - Change directory to <dir>\n";
@@ -58,11 +78,15 @@ string handleCommand(vector<string> input){
 }
 
 int main (int argc, char *argv[]) {
+  banner();
   while(true){
     cout<<"[~/"<<getPathFromHome()<<"]$ ";
     string input;
     getline(cin, input);
-    if(input == "exit") break;
+    if(input == "exit") {
+      cout<<"BYE..."<<endl;
+      return 0;
+    }
     vector<string> parsedInput = parser(input);
     cout << handleCommand(parsedInput);
   }
