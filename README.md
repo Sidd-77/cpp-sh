@@ -3,6 +3,8 @@
 ## Overview
 This is a simple shell written in C++ from scratch. It supports various shell-like features including command execution, piping, background processes, and I/O redirection.
 
+![image](https://github.com/user-attachments/assets/78c85d45-17ef-46fd-8ee0-2df2e8415d9b)
+
 ## Features
 - **Execute Commands**: Run standard system commands.
 - **Change Directory (`cd`)**: Navigate between directories.
